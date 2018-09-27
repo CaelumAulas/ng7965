@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: 'caelumpic-listagem',
@@ -7,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListagemComponent implements OnInit {
 
-  constructor() { }
+  title = 'Caelumpic';
+  listaFotos;
+
+  constructor(conexaoApi: HttpClient){
+    
+    conexaoApi.get('http://localhost:3000/v1/fotos')
+              .subscribe(
+                fotosApi => this.listaFotos = fotosApi
+                ,erro => console.log(erro)
+              )
+  }
 
   ngOnInit() {
   }
