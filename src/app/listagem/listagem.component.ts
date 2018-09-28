@@ -11,7 +11,7 @@ import { FotoService } from '../services/foto.service';
 export class ListagemComponent implements OnInit {
 
   title = 'Caelumpic';
-  listaFotos;
+  listaFotos: Foto[] = [];
   
   constructor(private fotoService: FotoService){
 
@@ -25,10 +25,19 @@ export class ListagemComponent implements OnInit {
   ngOnInit() {
   }
 
-  excluir(foto: Foto){
-    console.log(`Apagou ${foto.titulo}`);
+  excluir(fotoApagada: Foto){
 
-    this.fotoService.deletar()  
+    this.fotoService
+        .deletar(fotoApagada)
+        .subscribe(
+          resposta => {
+            console.log(resposta, `Apagou ${fotoApagada.titulo}`)
+
+            this.listaFotos = this.listaFotos.filter(foto => foto != fotoApagada)
+
+          }
+          ,erro => console.log(erro)
+        )
   }
 
 }

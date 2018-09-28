@@ -20,7 +20,9 @@ export class FotoService {
         return this.conexaoApi.post(this.url,foto)
     }
 
-    deletar(){}
+    deletar(foto: Foto): Observable<Object>{
+        return this.conexaoApi.delete(this.url+foto._id)
+    }
 
     atualizar(){}
 
