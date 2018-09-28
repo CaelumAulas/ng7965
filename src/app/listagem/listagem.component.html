@@ -11,7 +11,8 @@
 
   <div class="row">
     <caelumpic-painel *ngFor="let foto of listaFotos" [foto]="foto" class="col-md-4">
-      <foto [url]="foto.url" [titulo]="foto.titulo"></foto>
+      <foto class="foto" [url]="foto.url" [titulo]="foto.titulo"></foto>
+      <button (click)="excluir(foto)" class="btn btn-danger">Apagar</button>
     </caelumpic-painel>
   </div>
 
