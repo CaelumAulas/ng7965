@@ -8,21 +8,24 @@ import { PainelComponent } from './painel/painel.component';
 import { ListagemComponent } from './listagem/listagem.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { ModuloRoteamento } from './app.routes';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MensagemComponent } from './mensagem/mensagem.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PainelComponent,
     ListagemComponent,
-    CadastroComponent
+    CadastroComponent,
+    MensagemComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FotoModule,
     ModuloRoteamento,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

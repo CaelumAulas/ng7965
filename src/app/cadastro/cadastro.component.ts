@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Foto } from '../foto/foto';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FotoService } from '../services/foto.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'caelumpic-cadastro',
@@ -11,12 +12,24 @@ import { FotoService } from '../services/foto.service';
 export class CadastroComponent implements OnInit {
 
   foto: Foto = new Foto();
+  formCadastro: FormGroup;
   
   constructor(private fotoService: FotoService
               ,private roteador: Router
-              ,private rotaAtivada: ActivatedRoute){}
+              ,private rotaAtivada: ActivatedRoute
+              ,private formBuilder: FormBuilder){}
 
   ngOnInit() {
+
+    this.formCadastro = this.formBuilder.group({
+      titulo: ['', Validators.compose([
+        Validators.required,
+        Validators.minLength(4)
+      ])],
+      url: ['', Validators.required],
+      descricao: ''
+    })
+
     /* 
     this.rotaAtivada.params.subscribe(paramsRota => {
       console.log(paramsRota.fotoId);
@@ -29,6 +42,7 @@ export class CadastroComponent implements OnInit {
           .subscribe(
             fotoApi => {
               this.foto = fotoApi
+              this.formCadastro.patchValue(fotoApi)
             }
           )
     }
@@ -36,6 +50,14 @@ export class CadastroComponent implements OnInit {
   }
 
   salvar(){
+
+
+    
+    this.foto = {...this.foto, ...this.formCadastro.value}
+
+
+    console.log(this.foto);
+    
 
     if(this.foto._id){
       this.fotoService
@@ -55,6 +77,6 @@ export class CadastroComponent implements OnInit {
             , erro => console.log(erro)
           )
     }
-
+ 
   }
 }
