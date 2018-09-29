@@ -51,13 +51,7 @@ export class CadastroComponent implements OnInit {
 
   salvar(){
 
-
-    
     this.foto = {...this.foto, ...this.formCadastro.value}
-
-
-    console.log(this.foto);
-    
 
     if(this.foto._id){
       this.fotoService
